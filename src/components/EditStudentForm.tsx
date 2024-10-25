@@ -7,6 +7,7 @@ import {
   levelKeys,
   majorKeys,
   gpaValues,
+  instructorKeys,
 } from '@/lib/validationSchemas';
 import { Button, ButtonGroup, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm, Controller } from 'react-hook-form';
@@ -85,6 +86,25 @@ const EditStudentForm = ({ student }: { student: ICreateStudentForm }) => {
                     <Form.Text style={{ color: 'red' }}>*</Form.Text>
                   </Form.Label>
                   <Form.Control type="email" value={student.email} disabled />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="formInstructor">
+                  <Form.Label>
+                    Instructor
+                    <Form.Text style={{ color: 'red' }}>*</Form.Text>
+                  </Form.Label>
+                  <Form.Select
+                    {...register('instructor')}
+                    className={`form-control ${errors.instructor ? 'is-invalid' : ''}`}
+                  >
+                    {instructorKeys.map((instructor) => (
+                      <option key={instructor} value={instructor}>
+                        {instructor}
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <div className="invalid-feedback">{errors.instructor?.message}</div>
                 </Form.Group>
               </Col>
             </Row>
